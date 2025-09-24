@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Space</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>--- password ---</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <p id="space1">---------don't go----------- <br> -------</p>
-  <h1>Understand the Message</h1>
-  <p id="anonymous">Anonymous</p>
+  <div id="dot"></div>
+  <div id="scroll-arrow"></div>
+  <p id="scrollText">scroll down</p>
+  <div id="line"></div>
 
-  <p id="friendCount">Friends: 0</p>
-  <button id="friendBtn">new Friend</button>
+  <!-- Puzzle area -->
+  <div id="puzzle">
+    <h2>Find the Password</h2>
+    <p>Search online for the famous chess player Paul Morphy. Use the clues to figure out the password.</p>
+    <p><strong>Hint:</strong> use the Tutorial (download the text file)</p>
+    <input id="password-input" type="text" placeholder="Enter password">
+    <button id="submit-btn">Submit</button>
+    <p id="message"></p>
 
-  <p id="progress">Step: 0/10</p>
-  <button id="nextBtn">Next Step</button>
-  <p id="messagePrg"></p>
+    <!-- Download-Link direkt in der Puzzle-Box -->
+    <a id="download-link" href="SecretPassword.txt" download>📄 Download Password Tutorial</a>
+  </div>
 
-  <!-- Musik-Button -->
-  <button id="musicBtn">Play Music</button>
-
-  <!-- Audio-Datei -->
-  <audio id="bg-music" loop>
-    <source src="universe-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
