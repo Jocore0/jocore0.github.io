@@ -1,45 +1,55 @@
-// --- Friend Counter ---
-let count = 0;
-const max = 5;
-const friendBtn = document.getElementById('friendBtn');
-const friendCount = document.getElementById('friendCount');
+const dot = document.getElementById('dot');
+const arrow = document.getElementById('scroll-arrow');
+const scrollText = document.getElementById('scrollText');
+const line = document.getElementById('line');
+const puzzle = document.getElementById('puzzle');
+const submitBtn = document.getElementById('submit-btn');
+const passwordInput = document.getElementById('password-input');
+const message = document.getElementById('message');
+const downloadLink = document.getElementById('download-link');
+let clicks = 0;
 
-friendBtn.addEventListener('click', () => {
-  count++;
-  if (count > max) count = 0; // reset after max
-  friendCount.textContent = "Real Friends: " + count;
+// Passwort Base64-codiert
+const encodedPassword = "dTIzN09ybGVhbnM=";
+
+dot.addEventListener('click', () => {
+    clicks++;
+    if (clicks < 3) {
+        dot.style.width = (50 + clicks * 50) + 'px';
+        dot.style.height = (50 + clicks * 50) + 'px';
+    } else if (clicks === 3) {
+        dot.style.background = 'transparent';
+        dot.style.width = '0';
+        dot.style.height = '0';
+        dot.classList.add('triangle');
+
+        const blackDot = document.createElement('div');
+        blackDot.classList.add('black-dot');
+        dot.appendChild(blackDot);
+
+        arrow.style.display = 'block';
+        scrollText.style.color = 'white';
+        document.body.style.minHeight = '200vh';
+        document.body.style.overflow = 'auto';
+
+        // Puzzle anzeigen
+        puzzle.style.display = 'block';
+
+        line.style.background = 'white';
+    }
 });
 
-// --- Music Toggle ---
-const musicBtn = document.getElementById("musicBtn");
-const bgMusic = document.getElementById("bg-music");
-let isPlaying = false;
+submitBtn.addEventListener('click', () => {
+    const answer = passwordInput.value.trim();
+    const correctPassword = atob(encodedPassword);
 
-musicBtn.addEventListener("click", () => {
-  if (isPlaying) {
-    bgMusic.pause();
-    musicBtn.textContent = "Play Music";
-  } else {
-    bgMusic.play();
-    musicBtn.textContent = "Pause Music";
-  }
-  isPlaying = !isPlaying;
-});
-
-// --- Step Counter ---
-const maxStep = 10;
-let step = 0;
-const progress = document.getElementById("progress");
-const nextBtn = document.getElementById("nextBtn");
-const messagePrg = document.getElementById("messagePrg");
-
-nextBtn.addEventListener("click", () => {
-    step++;
-    if (step < maxStep) {
-    progress.textContent = "Step: " + step + "/" + maxStep;
-    } else if (step === maxStep) {
-    progress.textContent = "Step: " + step + "/" + maxStep;
-    messagePrg.textContent = "Did you saw that 90% was just the path, not the goal?";
-    nextBtn.disabled = true; // Button deaktivieren, da Ziel erreicht
+    if(answer === correctPassword){
+        message.style.color = '#66ff66';
+        message.textContent = "✅ Correct! You can now download the file.";
+        downloadLink.style.display = 'inline-block';
+    } else {
+        message.style.color = '#ff6666';
+        message.textContent = "❌ Wrong password, try again!";
+        downloadLink.style.display = 'none';
     }
 });
